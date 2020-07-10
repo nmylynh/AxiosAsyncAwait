@@ -7,11 +7,11 @@ function App() {
   const [planet, setPlanet] = useState({})
   let [id, setId] = useState(1)
 
-  const BASE_URL = 'https://swapi.dev/api/planets/'
+  const BASE_URL = 'https://swapi.dev/api/'
   
   const requestPlanetData = async () => {
     try {
-       let res = await axios.get(`${BASE_URL}/planet/${id}`);
+       let res = await axios.get(`${BASE_URL}/planets/${id}`);
       let { data } = res;
       return setPlanet(data)
     } catch(err) {
