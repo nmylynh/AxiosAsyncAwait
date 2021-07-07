@@ -4,34 +4,34 @@ import React, { useEffect, useState } from "react";
 
 
 function App() {
-  const [character, setCharacter] = useState({})
+  const [planet, setPlanet] = useState({})
   let [id, setId] = useState(1)
 
   const BASE_URL = 'https://swapi.dev/api'
   // then and catch version
   // change the url to see what else you can look at, like /planets or /starships
-  const requestCharacterData = () => {
+  const requestPlanetData = () => {
     axios
-      .get(`${BASE_URL}/people/${id}`)
+      .get(`${BASE_URL}/planet/${id}`)
       .then(res => {
         // try console logging res.data
         console.log(res)
-        return setCharacter(res.data)
+        return setPlanet(res.data)
       })
       .catch(err => {
         console.error(err)
       })
   }
-  // async version, uncomment to try out
-  // const requestCharacterData = async () => {
-  //   try {
-  //     let res = await axios.get(`${BASE_URL}/people/${id}`);
-  //     let { data } = res;
-  //     return setCharacter(data)
-  //   } catch(err) {
-  //     console.error(err)
-  //   }
-  // };
+//   async version, uncomment to try out
+  const requestPlanetData = async () => {
+    try {
+      let res = await axios.get(`${BASE_URL}/planet/${id}`);
+      let { data } = res;
+      return setPlanet(data)
+    } catch(err) {
+      console.error(err)
+    }
+  };
 
   const next = () => {
     setId(id++)
@@ -42,7 +42,7 @@ function App() {
   }
 
   useEffect(() => {
-    requestCharacterData()
+    requestPlanetData()
     console.log(id)
   }, [id])
 
@@ -51,9 +51,9 @@ function App() {
     // see if you can render more object properties
     <div className="App">
       <header className="App-header">
-        <p>{character.name}</p>
-        <p> {character.birth_year}</p>
-        <p>{character.gender}</p>
+        <p>{planet.name}</p>
+        <p> {planet.gravity}</p>
+        <p>{planet.climate}</p>
         <button onClick={back}>back</button>
         <button onClick={next}>next</button>
       </header>
